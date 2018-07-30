@@ -7,7 +7,7 @@ resource "random_string" "uniquename" {
 
 
 resource "google_compute_instance" "default" {
-        name    = "${random_string.uniquename.result}" 
+        name    = "terraform-${random_string.uniquename.result}" 
         machine_type = "n1-standard-1"
 	zone	= "us-central1-a"
 	boot_disk {
@@ -23,7 +23,7 @@ resource "google_compute_instance" "default" {
 		}
 	}
 
-	metadata_startup_script = "sudo yum update -y && touch /ok"
+	metadata_startup_script = "sudo yum update -y && yum install docker -y"
 
 }
 
