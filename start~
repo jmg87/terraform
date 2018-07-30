@@ -1,0 +1,7 @@
+provider "google" {
+	project	= "memelab-210706"
+	region	= "us-east1-a"
+	}
+resource "google_compute_instance" "default" {
+	}
+
