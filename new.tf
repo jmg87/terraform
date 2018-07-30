@@ -1,5 +1,13 @@
+resource "random_string" "uniquename" {
+	length	 = 8
+	special	 = false
+	upper	 = false 
+	}
+
+
+
 resource "google_compute_instance" "default" {
-        name    = "terraform"
+        name    = "${random_string.uniquename.result}" 
         machine_type = "n1-standard-1"
 	zone	= "us-central1-a"
 	boot_disk {
@@ -11,11 +19,11 @@ resource "google_compute_instance" "default" {
 		network = "default"
 		
 		access_config{
-		//ephenerak UO
+		//ephemeral IP
 		}
 	}
 
-	metadata_startup_script = "sudo yum update && touch /ok"
+	metadata_startup_script = "sudo yum update -y && touch /ok"
 
 }
 
